@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="secure" namespace="/secure"  extends="struts-default">
+		<interceptors>
+			<interceptor name="myInterceptor" class="com.struts2.learning.SecurityInterceptor" />
+			<interceptor-stack name="myStack">
+				<interceptor-ref name="defaultStack" />
+				<interceptor-ref name="myInterceptor" />
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="myStack" />
+		<global-results>
+			<result name="login" type="redirectAction">
+				<param name="actionName">LoginAction</param>
+				<param name="namespace">/</param>
+				<param name="method">input</param>
+			</result>
+		</global-results>
+		<action name="RoomAction" class="com.struts2.learning.RoomAction" >
+			<result>/secure/occupiedRoomList.jsp</result>
+			<result name="allocateRoom">/secure/roomAllocated.jsp</result>
+			<result name="deallocateRoom">/secure/roomDeallocated.jsp</result>
+		</action>
+		<action name="HomeAction">
+			<result>/secure/userhome.jsp</result>
+		</action>
+		<action name="LogoutAction" class="com.struts2.learning.LogoutAction" >
+			<result>/welcome.jsp</result>
+		</action>
+	</package>
+</struts>    

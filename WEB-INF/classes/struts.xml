@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<constant name="struts.custom.i18n.resources" value="global-messages" />
+	<include file="general.xml" />
+	<include file="secure.xml" />
+	<package name="default" namespace="/" extends="struts-default">
+		<default-action-ref name="Welcome"/>
+		<action name="Welcome">
+			<result>/welcome.jsp</result>
+		</action>
+		<action name="LoginAction" class="com.struts2.learning.LoginAction">
+			<result name="input">/login.jsp</result>
+			<result>/secure/userhome.jsp</result>
+		</action>
+		<action name="BackAction" class="com.struts2.learning.BackAction">
+			<result name="user">/secure/userhome.jsp</result>
+			<result name="guest">/welcome.jsp</result>
+		</action>
+	</package>
+</struts>
